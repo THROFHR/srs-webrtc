@@ -20,9 +20,13 @@
     <button onClick="doGen()" class="input">生成链接</button>
     <div id="output"></div>
     <script>
+        function tLink(link) {
+            var v = new URL(link)
+            return link.replace(v.origin, location.origin)
+        }
         function doGen() {
             const push = document.getElementById("push").value
-            const device = document.getElementById("device").value
+            const device = tLink(document.getElementById("device").value)
             const output = document.getElementById("output")
 
             const link = new URL(location.origin + '/html/demo.html')
