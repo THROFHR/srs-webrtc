@@ -9,21 +9,23 @@ services:
       - 443:443
     volumes:
       - ./web:/usr/share/nginx/html
-      - ./nginx/logs:/var/log/nginx
+      # - ./nginx/logs:/var/log/nginx
       # 有可能会出现不能挂载，这个时候用手动拷贝配置文件就行
       - ./nginx/nginx.conf/:/etc/nginx/nginx.conf
-      - ./nginx/etc/cert:/etc/nginx/cert
+      - ./nginx/cert:/etc/nginx/cert
       - ./nginx/conf.d:/etc/nginx/conf.d
     environment:
       - NGINX_PORT=80
       - TZ=Asia/Shanghai
     privileged: true
-
+    depends_on:
+       - srs
   srs:
     image: ossrs/srs:4
     command: ./objs/srs -c rtmp2rtc.conf
     environment:
-      - CANDIDATE=192.168.1.4
+      #内网ip
+      - CANDIDATE=172.17.0.1
     ports:
       - "1935:1935"
       - "1985:1985"
