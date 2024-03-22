@@ -27,15 +27,10 @@
 <body>
     <div id="rtc_media_player" style="width:100%;height:500px;display:flex;align-items:center;justify-content:center;">
     </div>
-    <iframe src="" frameborder="0"></iframe>
 
     <script>
         let params = new URLSearchParams(document.location.search);
         let push = params.get("push");
-        let mobile = params.get("device");
-
-        console.log(mobile);
-        document.querySelector("iframe").src = mobile
 
 
         var sdk = null; // Global handler to do cleanup when republishing.
